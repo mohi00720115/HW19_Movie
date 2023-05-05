@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.hw19_movie.ui.main_fragment.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_popularMoviesFragment"
+            app:destination="@id/popularMoviesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_comingSoonMovieFragment"
+            app:destination="@id/comingSoonMovieFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_myFavoriteMovieFragment"
+            app:destination="@id/myFavoriteMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.hw19_movie.ui.movie.MovieFragment"
+        android:label="MovieFragment" />
+    <fragment
+        android:id="@+id/comingSoonMovieFragment"
+        android:name="com.example.hw19_movie.ui.coming_soon.ComingSoonMovieFragment"
+        android:label="ComingSoonMovieFragment" />
+    <fragment
+        android:id="@+id/popularMoviesFragment"
+        android:name="com.example.hw19_movie.ui.popular_movie.PopularMoviesFragment"
+        android:label="PopularMoviesFragment" />
+    <fragment
+        android:id="@+id/myFavoriteMovieFragment"
+        android:name="com.example.hw19_movie.ui.my_favorite.MyFavoriteMovieFragment"
+        android:label="MyFavoriteMovieFragment" />
+</navigation>
