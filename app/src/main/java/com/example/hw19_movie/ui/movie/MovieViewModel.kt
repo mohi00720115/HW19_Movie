@@ -1,44 +1,59 @@
 package com.example.hw19_movie.ui.movie
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.content.ContentValues.TAG
+import android.util.Log
+import androidx.lifecycle.*
+import com.example.hw19_movie.data.MovieItem
 import com.example.hw19_movie.data.repository.Repository
 import com.example.hw19_movie.model.entity.MovieEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private fun insertAll(movieEntity: List<MovieEntity>) {
+    fun insertAll(movieEntity: List<MovieEntity>) {
         viewModelScope.launch { repository.insertAll(movieEntity) }
     }
 
-    private fun insert(movieEntity: MovieEntity) {
+    fun insert(movieEntity: MovieEntity) {
         viewModelScope.launch {
             repository.insert(movieEntity)
         }
     }
 
-    private fun getAllMovie(): Flow<List<MovieEntity>> {
-        return repository.getAllMovie()
+    fun getAllMovie(): LiveData<List<MovieItem>> {
+        return repository.getAllMovie().asLiveData()
     }
 
-    private fun getMovie(id: Int): Flow<MovieEntity> {
-        return repository.getMovie(id)
+    fun getMovie(id: Int): LiveData<MovieEntity> {
+        return repository.getMovie(id).asLiveData()
     }
 
-    private fun update(movieEntity: MovieEntity) {
+    fun update(movieEntity: MovieEntity) {
         viewModelScope.launch {
             repository.update(movieEntity)
         }
     }
 
-    private fun delete(movieEntity: MovieEntity) {
+    fun delete(movieEntity: MovieEntity) {
         viewModelScope.launch {
             repository.delete(movieEntity)
+        }
+    }
+
+    private val _popularMovieList = MutableLiveData<List<MovieItem>>()
+    val popularMovieList: MutableLiveData<List<MovieItem>> = _popularMovieList
+
+    fun getAllMovieService(page: Int) {
+        viewModelScope.launch {
+            try {
+                popularMovieList.postValue(repository.getAllMovieService(page))
+            }catch (e:Exception){
+                Log.e(TAG, "getAllMovieService: ${e.message}")
+            }
         }
     }
 

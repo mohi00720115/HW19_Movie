@@ -8,6 +8,7 @@ import com.example.hw19_movie.data.network.IMovieNetwork
 import com.example.hw19_movie.data.repository.Repository
 import com.example.hw19_movie.util.API_KEY
 import com.example.hw19_movie.util.BASE_URL
+import com.example.hw19_movie.util.LANGUAGE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,7 @@ object AppModule {
             .url
             .newBuilder()
             .addQueryParameter("api_key", API_KEY)
+            .addQueryParameter("language", LANGUAGE)
             .build()
         val request = chain.request()
             .newBuilder()
@@ -61,8 +63,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit = Retrofit.Builder()
+    fun provideRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -75,7 +78,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(application: Application): MovieDataBase {
-        return Room.databaseBuilder(application, MovieDataBase::class.java, "movie_database").build()
+        return Room.databaseBuilder(application, MovieDataBase::class.java, "movie_database")
+            .build()
     }
 
     @Provides
@@ -87,7 +91,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRepository(iMovieNetwork: IMovieNetwork, iMovieDao: IMovieDao): Repository {
-        return Repository(iMovieDao)
+        return Repository(iMovieNetwork, iMovieDao)
     }
 
 }

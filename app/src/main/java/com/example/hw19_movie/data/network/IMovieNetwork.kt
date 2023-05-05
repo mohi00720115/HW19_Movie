@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface IMovieNetwork {
     @GET("movie/popular")
-    fun getAllMovie(@Query("page") page: Int): MovieData
+    suspend fun getAllMovieService(@Query("page") page: Int = 1): MovieData
 }

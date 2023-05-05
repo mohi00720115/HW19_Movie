@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_movies"
+        android:id="@+id/movieFragment"
         android:icon="@drawable/movie"
         android:title="Movies" />
 
     <item
-        android:id="@+id/action_coming_soon"
+        android:id="@+id/comingSoonMovieFragment"
         android:icon="@drawable/alarm"
         android:title="Coming Soon Movies" />
 
     <item
-        android:id="@+id/action_popular"
+        android:id="@+id/popularMoviesFragment"
         android:icon="@drawable/baseline_star"
         android:title="popular Movies" />
 
     <item
-        android:id="@+id/action_my_favorite"
+        android:id="@+id/myFavoriteMovieFragment"
         android:icon="@drawable/baseline_favorite"
         android:title="My Favorite Movies" />
 
