@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.hw19_movie.ui.main_fragment.MainFragment"
-        android:label="MainFragment" >
+        android:label="MainFragment">
         <action
             android:id="@+id/action_mainFragment_to_movieFragment"
             app:destination="@id/movieFragment" />
@@ -37,4 +37,11 @@
         android:id="@+id/myFavoriteMovieFragment"
         android:name="com.example.hw19_movie.ui.my_favorite.MyFavoriteMovieFragment"
         android:label="MyFavoriteMovieFragment" />
+    <dialog
+        android:id="@+id/dialogMovieFragment"
+        android:name="com.example.hw19_movie.ui.dialog_movie.DialogMovieFragment"
+        android:label="DialogMovieFragment" />
+    <action
+        android:id="@+id/action_global_dialogMovieFragment"
+        app:destination="@id/dialogMovieFragment" />
 </navigation>

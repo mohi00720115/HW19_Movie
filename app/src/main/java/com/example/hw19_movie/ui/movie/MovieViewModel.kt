@@ -8,7 +8,6 @@ import com.example.hw19_movie.data.repository.Repository
 import com.example.hw19_movie.model.entity.MovieEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,9 +17,9 @@ class MovieViewModel @Inject constructor(private val repository: Repository) : V
         viewModelScope.launch { repository.insertAll(movieEntity) }
     }
 
-    fun insert(movieEntity: MovieEntity) {
+    fun insert(movieItem: MovieItem) {
         viewModelScope.launch {
-            repository.insert(movieEntity)
+            repository.insert(movieItem)
         }
     }
 
@@ -44,14 +43,14 @@ class MovieViewModel @Inject constructor(private val repository: Repository) : V
         }
     }
 
-    private val _popularMovieList = MutableLiveData<List<MovieItem>>()
-    val popularMovieList: MutableLiveData<List<MovieItem>> = _popularMovieList
+    private val _movieList = MutableLiveData<List<MovieItem>>()
+    val movieList: MutableLiveData<List<MovieItem>> = _movieList
 
     fun getAllMovieService(page: Int) {
         viewModelScope.launch {
             try {
-                popularMovieList.postValue(repository.getAllMovieService(page))
-            }catch (e:Exception){
+                movieList.postValue(repository.getAllMovieService(page))
+            } catch (e: Exception) {
                 Log.e(TAG, "getAllMovieService: ${e.message}")
             }
         }

@@ -25,11 +25,13 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         binding.lifecycleOwner = viewLifecycleOwner
 
         navController = findNavController()
-        adapterMovie = MovieAdapter()
+        adapterMovie = MovieAdapter {
+            viewModel.insert(it)
+        }
         setAdapter()
 
         viewModel.getAllMovieService(20)
-        viewModel.popularMovieList.observe(viewLifecycleOwner) {
+        viewModel.movieList.observe(viewLifecycleOwner) {
             adapterMovie.submitList(it)
         }
 
@@ -39,9 +41,6 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
      * Create and set Adapter
      */
     private fun setAdapter() {
-//        viewModel.getAllMovie().observe(viewLifecycleOwner) {
-//            adapterMovie.submitList(it!!.toMutableList())
-//        }
         binding.recyclerViewMovie.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.recyclerViewMovie.adapter = adapterMovie
     }

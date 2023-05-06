@@ -6,8 +6,9 @@ import com.example.hw19_movie.data.MovieItem
 import com.example.hw19_movie.data.local.db.IMovieDao
 import com.example.hw19_movie.data.network.IMovieNetwork
 import com.example.hw19_movie.model.entity.MovieEntity
-import com.example.hw19_movie.util.listEntityToListMovieData
+import com.example.hw19_movie.util.listEntityToListMovieItem
 import com.example.hw19_movie.util.listResultToMovieItemList
+import com.example.hw19_movie.util.movieItemToMovieEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -20,14 +21,14 @@ class Repository(
         iMovieDao.insertAll(movieEntity)
     }
 
-    suspend fun insert(movieEntity: MovieEntity) {
-        iMovieDao.insert(movieEntity)
+    suspend fun insert(movieItem: MovieItem) {
+        iMovieDao.insert(movieItemToMovieEntity(movieItem))
     }
 
     fun getAllMovie(): Flow<List<MovieItem>> {
         return flow {
             iMovieDao.getAllMovie().collect {
-                listEntityToListMovieData(it)
+                listEntityToListMovieItem(it)
                 Log.e(TAG, "getAllMovie: listEntityToListMovieData $it")
             }
         }
