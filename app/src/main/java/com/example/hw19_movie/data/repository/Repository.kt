@@ -11,8 +11,10 @@ import com.example.hw19_movie.util.listResultToMovieItemList
 import com.example.hw19_movie.util.movieItemToMovieEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class Repository(
+//اینجا اینجکت نیازه یا نه؟!
+class Repository (
     private val movieNetwork: IMovieNetwork,
     private val iMovieDao: IMovieDao
 ) {

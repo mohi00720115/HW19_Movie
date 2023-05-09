@@ -13,6 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
+
     fun insertAll(movieEntity: List<MovieEntity>) {
         viewModelScope.launch { repository.insertAll(movieEntity) }
     }
@@ -46,10 +47,22 @@ class MovieViewModel @Inject constructor(private val repository: Repository) : V
     private val _movieList = MutableLiveData<List<MovieItem>>()
     val movieList: MutableLiveData<List<MovieItem>> = _movieList
 
+    private val addMovieList = arrayListOf<MovieItem>()
+    fun addMovieList(list: List<MovieItem>) {
+        addMovieList.addAll(list)
+        _movieList.postValue(addMovieList)
+    }
+
+    private var pageOfMovie = 1
+    fun nextPage() {
+        pageOfMovie++
+        getAllMovieService(pageOfMovie)
+    }
+
     fun getAllMovieService(page: Int) {
         viewModelScope.launch {
             try {
-                movieList.postValue(repository.getAllMovieService(page))
+                addMovieList(repository.getAllMovieService(page) ?: emptyList())
             } catch (e: Exception) {
                 Log.e(TAG, "getAllMovieService: ${e.message}")
             }

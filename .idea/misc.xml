@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/activity_main.xml" value="0.2111111111111111" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/alaki.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/detail_movies.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/detail_movies_dialog.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/fragment_comming_soon_movie.xml" value="0.23229166666666667" />
@@ -13,6 +14,7 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/fragment_my_favorite_movie.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/fragment_popular_movies.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/item_movies.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/layout/item_movies2.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/HW19_Movie/app/src/main/res/menu/menu.xml" value="0.264" />
       </map>
     </option>

@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hw19_movie.R
 import com.example.hw19_movie.data.MovieItem
+import com.example.hw19_movie.databinding.ItemMovies2Binding
 import com.example.hw19_movie.databinding.ItemMoviesBinding
 
 class MovieAdapter(
-    private val click: (item: MovieItem) -> Unit
+    private val clickOnItemMovies: (id: Int) -> Unit,
+    private val clickOnLikeIcons: (item: MovieItem) -> Unit
 ) : ListAdapter<MovieItem, MovieAdapter.ViewHolder>(DiffCallback()) {
     class DiffCallback : DiffUtil.ItemCallback<MovieItem>() {
         override fun areItemsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
@@ -23,17 +25,17 @@ class MovieAdapter(
             oldItem == newItem
     }
 
-    inner class ViewHolder(private val binding: ItemMoviesBinding) :
+    inner class ViewHolder(private val binding: ItemMovies2Binding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
         private fun likeOrOnLike(item: MovieItem) {
             if (!item.flag) {
                 item.flag = true
-                binding.ivLike.setImageResource(R.drawable.baseline_favorite)
+                binding.ivLike2.setImageResource(R.drawable.baseline_favorite)
             } else {
                 item.flag = false
-                binding.ivLike.setImageResource(R.drawable.favorite_border)
+                binding.ivLike2.setImageResource(R.drawable.favorite_border)
             }
         }
 
@@ -43,17 +45,21 @@ class MovieAdapter(
             Log.e(TAG, "Movie Adapter: total_pages ${item.releaseDate}")
             Log.e(TAG, "Movie Adapter: total_results ${item.title}")
 
-            binding.tvName.text = item.title.toString()
-            binding.tvTitle.text = item.id.toString()
-            binding.tvDescription.text = item.releaseDate.toString()
+            binding.tvName2.text = item.title.toString()
+            binding.tvTitle2.text = item.id.toString()
+            binding.tvRealizeDate2.text = item.releaseDate.toString()
 
             Glide.with(binding.root)
                 .load("https://image.tmdb.org/t/p/w500" + item.posterPath)
 //                .placeholder(R.drawable.loading_animation)
-                .into(binding.imageViewMovie)
+                .into(binding.imageViewMovie2)
 
-//            var flag = false
-            binding.ivLike.setOnClickListener {
+            binding.constraintLayout2.setOnClickListener{
+                clickOnItemMovies(item.id!!)
+                Log.e(TAG, "bind: ${item.id}")
+            }
+
+            binding.ivLike2.setOnClickListener {
                 likeOrOnLike(item)
             }
 
@@ -62,7 +68,7 @@ class MovieAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(ItemMoviesBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        ViewHolder(ItemMovies2Binding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(getItem(position))

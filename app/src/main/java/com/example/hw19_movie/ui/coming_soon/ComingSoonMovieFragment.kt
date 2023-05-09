@@ -1,10 +1,10 @@
 package com.example.hw19_movie.ui.coming_soon
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -12,9 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.hw19_movie.R
 import com.example.hw19_movie.databinding.FragmentCommingSoonMovieBinding
-import com.example.hw19_movie.databinding.FragmentPopularMoviesBinding
 import com.example.hw19_movie.ui.MovieAdapter
-import com.example.hw19_movie.ui.movie.MovieViewModel
+import com.example.hw19_movie.ui.movie.MovieFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +27,19 @@ class ComingSoonMovieFragment : Fragment(R.layout.fragment_comming_soon_movie) {
         binding = DataBindingUtil.bind(view)!!
         binding.lifecycleOwner = viewLifecycleOwner
         navController = findNavController()
+
+
+        adapterComingSoon = MovieAdapter({
+            navController.navigate(MovieFragmentDirections.actionGlobalDialogMovieFragment())
+        }) {
+            Log.w(ContentValues.TAG, "setAdapter: ")
+        }
         setAdapter()
+
+        viewModel.getAllMovieService(35)
+        viewModel.comingSoonMovieList.observe(viewLifecycleOwner) {
+            adapterComingSoon.submitList(it)
+        }
 
     }
 
@@ -36,9 +47,6 @@ class ComingSoonMovieFragment : Fragment(R.layout.fragment_comming_soon_movie) {
      * Create and set Adapter
      */
     private fun setAdapter() {
-        adapterComingSoon = MovieAdapter{
-
-        }
         binding.recyclerViewComingSoon.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.recyclerViewComingSoon.adapter = adapterComingSoon
     }
