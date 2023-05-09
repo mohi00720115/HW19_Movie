@@ -1,6 +1,5 @@
 package com.example.hw19_movie.ui.movie
 
-import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -23,28 +22,31 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
     private lateinit var adapterMovie: MovieAdapter
     private lateinit var navController: NavController
     private val viewModel: MovieViewModel by viewModels()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = DataBindingUtil.bind(view)!!
         binding.lifecycleOwner = viewLifecycleOwner
-
         navController = findNavController()
-        adapterMovie = MovieAdapter({
-            navController.navigate(MovieFragmentDirections.actionGlobalDialogMovieFragment())
-        }) {
-            viewModel.insert(it)
-        }
+        setUpUi()
 
+    }
+
+    private fun setUpUi() {
         setAdapter()
+        observeLiveData()
+        pagingRecycler()
+    }
 
+    private fun observeLiveData() {
         viewModel.getAllMovieService(1)
         viewModel.movieList.observe(viewLifecycleOwner) {
             adapterMovie.submitList(it)
             adapterMovie.notifyDataSetChanged()
             Log.e(TAG, "onViewCreated: $it")
         }
+    }
 
+    private fun pagingRecycler() {
         binding.recyclerViewMovie.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val layoutManager = recyclerView.layoutManager as GridLayoutManager
@@ -54,19 +56,19 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
                 }
             }
         })
-
     }
 
     /**
      * Create and set Adapter
      */
     private fun setAdapter() {
+        adapterMovie = MovieAdapter({
+            navController.navigate(MovieFragmentDirections.actionGlobalDialogMovieFragment())
+        }) {
+            viewModel.insert(it)
+        }
         binding.recyclerViewMovie.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.recyclerViewMovie.adapter = adapterMovie
     }
-
-
-
-
 
 }

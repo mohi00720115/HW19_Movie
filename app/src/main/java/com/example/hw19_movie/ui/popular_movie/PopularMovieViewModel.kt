@@ -3,7 +3,7 @@ package com.example.hw19_movie.ui.popular_movie
 import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.hw19_movie.data.MovieItem
+import com.example.hw19_movie.model.ui.MovieItem
 import com.example.hw19_movie.data.repository.Repository
 import com.example.hw19_movie.model.entity.MovieEntity
 import dagger.hilt.android.lifecycle.HiltViewModel

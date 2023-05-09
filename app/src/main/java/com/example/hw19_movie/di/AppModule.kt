@@ -56,7 +56,7 @@ object AppModule {
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .addInterceptor(httpLoggingInterceptor)
-//        .connectTimeout(3, TimeUnit.SECONDS)
+//        .connectTimeout(30, TimeUnit.SECONDS)
         .build()
 
     @Provides
@@ -82,8 +82,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(application: Application): MovieDataBase {
-        return Room.databaseBuilder(application, MovieDataBase::class.java, "movie_database")
-            .build()
+        return Room.databaseBuilder(application, MovieDataBase::class.java, "movie_database").build()
     }
 
     @Provides

@@ -27,25 +27,36 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
         binding = DataBindingUtil.bind(view)!!
         binding.lifecycleOwner = viewLifecycleOwner
         navController = findNavController()
-        adapterMyFavMovie = MovieAdapter({
-            navController.navigate(MovieFragmentDirections.actionGlobalDialogMovieFragment())
-        }) {
-            Log.w(ContentValues.TAG, "setAdapter: ")
-        }
-        setAdapter()
+        setUpUi()
 
+    }
+
+    private fun setUpUi() {
+        observeLiveData()
+        setAdapter()
+    }
+
+    /**
+     * Observe and submitList adapter
+     */
+    private fun observeLiveData() {
         viewModel.getAllMovieService(20)
         viewModel.popularMovieList.observe(viewLifecycleOwner) {
             adapterMyFavMovie.submitList(it)
         }
-
     }
 
     /**
      * Create and set Adapter
      */
     private fun setAdapter() {
+        adapterMyFavMovie = MovieAdapter({
+            navController.navigate(MovieFragmentDirections.actionGlobalDialogMovieFragment())
+        }) {
+            Log.w(ContentValues.TAG, "setAdapter: ")
+        }
         binding.recyclerViewPopular.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.recyclerViewPopular.adapter = adapterMyFavMovie
     }
+
 }

@@ -2,7 +2,7 @@ package com.example.hw19_movie.data.repository
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.hw19_movie.data.MovieItem
+import com.example.hw19_movie.model.ui.MovieItem
 import com.example.hw19_movie.data.local.db.IMovieDao
 import com.example.hw19_movie.data.network.IMovieNetwork
 import com.example.hw19_movie.model.entity.MovieEntity
@@ -13,8 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-//اینجا اینجکت نیازه یا نه؟!
-class Repository (
+class Repository @Inject constructor (
     private val movieNetwork: IMovieNetwork,
     private val iMovieDao: IMovieDao
 ) {

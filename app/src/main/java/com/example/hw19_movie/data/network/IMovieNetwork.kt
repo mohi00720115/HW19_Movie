@@ -1,6 +1,6 @@
 package com.example.hw19_movie.data.network
 
-import com.example.hw19_movie.data.MovieData
+import com.example.hw19_movie.model.dto.MovieData
 import retrofit2.http.GET
 import retrofit2.http.Query
 

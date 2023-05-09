@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.hw19_movie.data.MovieItem
 import com.example.hw19_movie.data.repository.Repository
 import com.example.hw19_movie.model.entity.MovieEntity
 import dagger.hilt.android.lifecycle.HiltViewModel

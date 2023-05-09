@@ -1,7 +1,7 @@
 package com.example.hw19_movie.util
 
-import com.example.hw19_movie.data.MovieItem
-import com.example.hw19_movie.data.Result
+import com.example.hw19_movie.model.ui.MovieItem
+import com.example.hw19_movie.model.dto.Result
 import com.example.hw19_movie.model.entity.MovieEntity
 
 /**

@@ -9,25 +9,23 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hw19_movie.R
-import com.example.hw19_movie.data.MovieItem
+import com.example.hw19_movie.model.ui.MovieItem
 import com.example.hw19_movie.databinding.ItemMovies2Binding
-import com.example.hw19_movie.databinding.ItemMoviesBinding
 
 class MovieAdapter(
     private val clickOnItemMovies: (id: Int) -> Unit,
     private val clickOnLikeIcons: (item: MovieItem) -> Unit
-) : ListAdapter<MovieItem, MovieAdapter.ViewHolder>(DiffCallback()) {
-    class DiffCallback : DiffUtil.ItemCallback<MovieItem>() {
-        override fun areItemsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
-            oldItem.id == newItem.id
-
-        override fun areContentsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
-            oldItem == newItem
+) : ListAdapter<MovieItem, MovieAdapter.ViewHolder>(object : DiffUtil.ItemCallback<MovieItem?>() {
+    override fun areItemsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean {
+        return oldItem.id == newItem.id
     }
 
+    override fun areContentsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean {
+        return oldItem == newItem
+    }
+}) {
     inner class ViewHolder(private val binding: ItemMovies2Binding) :
         RecyclerView.ViewHolder(binding.root) {
-
 
         private fun likeOrOnLike(item: MovieItem) {
             if (!item.flag) {
@@ -54,7 +52,7 @@ class MovieAdapter(
 //                .placeholder(R.drawable.loading_animation)
                 .into(binding.imageViewMovie2)
 
-            binding.constraintLayout2.setOnClickListener{
+            binding.constraintLayout2.setOnClickListener {
                 clickOnItemMovies(item.id!!)
                 Log.e(TAG, "bind: ${item.id}")
             }

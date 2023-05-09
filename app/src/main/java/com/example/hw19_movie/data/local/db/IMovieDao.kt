@@ -1,7 +1,6 @@
 package com.example.hw19_movie.data.local.db
 
 import androidx.room.*
-import com.example.hw19_movie.data.MovieData
 import com.example.hw19_movie.model.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
 

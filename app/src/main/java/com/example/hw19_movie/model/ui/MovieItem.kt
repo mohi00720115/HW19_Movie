@@ -1,4 +1,4 @@
-package com.example.hw19_movie.data
+package com.example.hw19_movie.model.ui
 
 data class MovieItem(
     val title: String?,
